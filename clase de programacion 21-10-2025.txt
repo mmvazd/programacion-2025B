@@ -1,0 +1,32 @@
+> install.packages("nycflights13")
+> library(nycflights13)
+> data("flights")
+> flights
+> f = flights
+> f
+> head(f)
+> tail(f)
+> View(f)
+> dim(f)
+> colnames(f)
+> summary(f)
+> library(dplyr)
+> vuelos_sel<-select (flights,year, month,        day,         dep_time,       sched_dep_time, dep_delay,      arr_time,       sched_arr_time, arr_delay, carrier)
+> vuelos_sel
+> vuelos_sel<-rename (vuelos_sel, Aereolinea = carrier, retraso_Salida=dep_delay)
+>vuelos_retrasado_mas_de_una_hora<- vuelos_sel%% filter(Retraso_Salida==-1)
+> flights <- mutate(flights, duracion_horas = air_time / 60)
+> resumen <- flights %>%
++     group_by(carrier) %>%
++     summarise(
++         Promedio_duracion = mean(duracion_horas, na.rm = TRUE),
++         Promedio_retraso = mean(dep_delay, na.rm = TRUE)
++     )
+> print(resumen)
+> Mm<-resumen%>%arrange(desc(Promedio_retraso))
+> Mn
+> colnames(flights)<-toupper(colnames(flights))
+> head(flights)
+> nuevos_nombres <- c("ANIO", "MES", "DIA", "HORA_SALIDA", "HORA_SALIDA_PROG", "RETARDO_SALIDA", "HORA_LLEGADA", "HORA_LLEGADA_PROG", "RATARDO_LLEGADA", "AEREOLINEA", "NUM_VUELO", "MATRICULA", "ORIGEN", "DESTINO", "TIEMPO_VUELO", "DISTANCIA", "HORA", "MINUTO", "FCHA_HORA", "DURACION_HORAS" )
+> colnames(flights)<- nuevos_nombres
+> head(flights)
